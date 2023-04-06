@@ -13,7 +13,7 @@ import {
   formuleOnId,
 } from "../service/index";
 import Joi from "joi";
-import { IFormule } from "../interface/formule.interface";
+import { IFormule } from "../interface/index";
 
 export const getAllFormules = (req: Request, res: Response) => {
   try {

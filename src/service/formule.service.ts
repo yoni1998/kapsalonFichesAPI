@@ -1,4 +1,4 @@
-import { IFormule } from "./../interface/formule.interface";
+import { IFormule } from "./../interface/index";
 import formule from "../model/formule.model";
 import { sortOnDatum } from "../common/abstract.methods";
 

@@ -6,7 +6,7 @@ import {
   insufficientParameters,
 } from "../common/abstract.response";
 import Joi from "joi";
-import { IFiche } from "../interface/fiche.interface";
+import { IFiche } from "../interface/index";
 import {
   findAllFiches,
   ficheOnId,

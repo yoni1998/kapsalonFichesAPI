@@ -1,5 +1,5 @@
 import { sortOnDatum, sortOnNaam } from "../common/abstract.methods";
-import { IFiche } from "../interface/fiche.interface";
+import { IFiche } from "../interface/index";
 import fiche from "../model/fiche.model";
 
 export const findAllFiches = async (sort?: any) => {
