@@ -1,11 +1,11 @@
 import { IFormule } from "./../interface/formule.interface";
 import formule from "../model/formule.model";
-import { sortDatum } from "../common/abstract.methods";
+import { sortOnDatum } from "../common/abstract.methods";
 
 export default class formuleService {
   protected findAll = async () => {
     const result = await formule.find();
-    return sortDatum(result);
+    return sortOnDatum(result);
   };
 
   protected formuleOnId = async (id: any) => await formule.findOne(id);

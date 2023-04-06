@@ -1,4 +1,4 @@
-import { sortDatum, sortNaamAlphabetically } from "../common/abstract.methods";
+import { sortOnDatum, sortOnNaam } from "../common/abstract.methods";
 import { IFiche } from "../interface/fiche.interface";
 import fiche from "../model/fiche.model";
 
@@ -6,10 +6,10 @@ export default class ficheService {
   protected findAll = async (sort?: any) => {
     if (sort === "naam") {
       const result = await fiche.find();
-      return sortNaamAlphabetically(result);
+      return sortOnNaam(result);
     } else if (sort === "datum") {
       const result = await fiche.find();
-      return sortDatum(result);
+      return sortOnDatum(result);
     } else {
       return await fiche.find();
     }
