@@ -1,8 +1,12 @@
 import { IFormule } from "./../interface/formule.interface";
 import formule from "../model/formule.model";
+import { sortDatum } from "../common/abstract.methods";
 
 export default class formuleService {
-  protected findAll = async () => await formule.find();
+  protected findAll = async () => {
+    const result = await formule.find();
+    return sortDatum(result);
+  };
 
   protected formuleOnId = async (id: any) => await formule.findOne(id);
 
@@ -16,7 +20,7 @@ export default class formuleService {
     await formule.findOneAndUpdate(id, editFormule);
   };
 
-  protected deleteFormule = async (id: String) => {
+  protected deleteFormule = async (id: string) => {
     const formuleOnId = { _id: id };
     await formule.deleteOne(formuleOnId);
   };

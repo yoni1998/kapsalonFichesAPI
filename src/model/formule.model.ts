@@ -10,6 +10,7 @@ export const schema = new mongoose.Schema({
     default: false,
   },
   created_on: ModificationNote,
+  ficheId: String,
 });
 
 export default mongoose.model("formule", schema);

@@ -10,4 +10,5 @@ export interface IFormule {
     default: false;
   };
   created_on: ModificationNote;
+  ficheId: String;
 }

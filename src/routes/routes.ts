@@ -8,12 +8,14 @@ dotenv.config();
 
 export class Routes {
   private ficheController: ficheController = new ficheController();
+  private ROOTPATH: string = process.env.ROOTPATH as string;
+  private SUBPATH: string = process.env.SUBPATH as string;
   public route(app: Application) {
     // middleware
     app
       .use("/", rootMiddleware)
-      .use("/api/fiche", ficheRouter)
-      .use("/api/formule", formuleRouter);
+      .use(this.ROOTPATH, ficheRouter)
+      .use(this.SUBPATH, formuleRouter);
     // root path
     app.get("/", (req: Request, res: Response) =>
       this.ficheController.getAllFiches(req, res)

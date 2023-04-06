@@ -12,7 +12,7 @@ import { IFiche } from "../interface/fiche.interface";
 export class ficheController extends ficheService {
   public getAllFiches(req: Request, res: Response) {
     try {
-      this.findAll().then((data: any) => {
+      this.findAll(req.query?.sort).then((data: any) => {
         data
           ? successResponse("get all fiches successfully", data, res)
           : failureResponse("something went wrong", [], res);

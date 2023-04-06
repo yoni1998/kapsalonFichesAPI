@@ -3,8 +3,9 @@ import { formuleController } from "../controller/formule.controller";
 let formuleRouter = express.Router();
 
 export class FormuleRoutes extends formuleController {
+  private PARAMETERS: string = process.env.PARAMETERS as string;
   public route() {
-    // use middleware
+    // routes
     formuleRouter
       .route("/")
       .get((req: Request, res: Response) => {
@@ -15,7 +16,7 @@ export class FormuleRoutes extends formuleController {
       });
 
     formuleRouter
-      .route("/:id")
+      .route(this.PARAMETERS)
       .get((req: Request, res: Response) => {
         this.getFormuleOnId(req, res);
       })
