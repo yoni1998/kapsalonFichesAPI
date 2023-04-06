@@ -5,5 +5,9 @@ export interface IFormule {
   formule: String;
   opmerking: String;
   prijs: Number;
+  is_deleted: {
+    type: Boolean;
+    default: false;
+  };
   created_on: ModificationNote;
 }

@@ -1,17 +1,16 @@
 import express, { Request, Response } from "express";
 import { ficheController } from "../controller/fiche.controller";
-import rootMiddleware from "../middleware/root.middleware";
-let router = express.Router();
+let ficheRouter = express.Router();
 
 export class FicheRoutes extends ficheController {
   public route() {
     // use middleware
-    router.route("/fiche").post((req: Request, res: Response) => {
+    ficheRouter.route("/").post((req: Request, res: Response) => {
       this.createNewFiche(req, res);
     });
 
-    router
-      .route("/fiche/:id")
+    ficheRouter
+      .route("/:id")
       .get((req: Request, res: Response) => {
         this.getFicheOnId(req, res);
       })
@@ -24,4 +23,4 @@ export class FicheRoutes extends ficheController {
   }
 }
 
-export default router;
+export default ficheRouter;
