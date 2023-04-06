@@ -6,8 +6,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import { Routes, FicheRoutes } from "./src/routes/index";
-import { FormuleRoutes } from "./src/routes/formule.route";
+import { Routes } from "./src/routes/index";
 dotenv.config();
 
 /**
@@ -18,8 +17,6 @@ if (!process.env.PORT) {
 }
 
 const routes: Routes = new Routes();
-const ficheRoutes: FicheRoutes = new FicheRoutes();
-const formuleRoutes: FormuleRoutes = new FormuleRoutes();
 const PORT: number = parseInt(process.env.PORT as string, 10);
 const URI: string = process.env.URI as string;
 
@@ -32,8 +29,6 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 routes.route(app);
-ficheRoutes.route();
-formuleRoutes.route();
 
 // connect to db
 const connectToDb = async () => {

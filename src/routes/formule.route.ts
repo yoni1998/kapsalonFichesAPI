@@ -1,32 +1,35 @@
 import express, { Request, Response } from "express";
-import { formuleController } from "../controller/formule.controller";
-let formuleRouter = express.Router();
+import * as dotenv from "dotenv";
+import {
+  createNewFormule,
+  deleteFormuleOnId,
+  getAllFormules,
+  getFormuleOnId,
+  updateCurrentFormule,
+} from "../controller/index";
 
-export class FormuleRoutes extends formuleController {
-  private PARAMETERS: string = process.env.PARAMETERS as string;
-  public route() {
-    // routes
-    formuleRouter
-      .route("/")
-      .get((req: Request, res: Response) => {
-        this.getAllFormules(req, res);
-      })
-      .post((req: Request, res: Response) => {
-        this.createNewFormule(req, res);
-      });
+let Router = express.Router();
+dotenv.config();
+const PARAMETERS: string = process.env.PARAMETERS as string;
 
-    formuleRouter
-      .route(this.PARAMETERS)
-      .get((req: Request, res: Response) => {
-        this.getFormuleOnId(req, res);
-      })
-      .put((req: Request, res: Response) => {
-        this.updateCurrentFormule(req, res);
-      })
-      .delete((req: Request, res: Response) => {
-        this.deleteFormuleOnId(req, res);
-      });
-  }
-}
+// routes
+Router.route("/")
+  .get((req: Request, res: Response) => {
+    getAllFormules(req, res);
+  })
+  .post((req: Request, res: Response) => {
+    createNewFormule(req, res);
+  });
 
-export default formuleRouter;
+Router.route(PARAMETERS)
+  .get((req: Request, res: Response) => {
+    getFormuleOnId(req, res);
+  })
+  .put((req: Request, res: Response) => {
+    updateCurrentFormule(req, res);
+  })
+  .delete((req: Request, res: Response) => {
+    deleteFormuleOnId(req, res);
+  });
+
+export default Router;

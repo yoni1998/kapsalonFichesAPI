@@ -1,27 +1,31 @@
 import express, { Request, Response } from "express";
-import { ficheController } from "../controller/fiche.controller";
-let ficheRouter = express.Router();
+import * as dotenv from "dotenv";
+import {
+  getFicheOnId,
+  deleteFicheOnId,
+  createNewFiche,
+  updateCurrentFiche,
+} from "../controller/index";
 
-export class FicheRoutes extends ficheController {
-  private PARAMETERS: string = process.env.PARAMETERS as string;
-  public route() {
-    // use routes
-    ficheRouter.route("/").post((req: Request, res: Response) => {
-      this.createNewFiche(req, res);
-    });
+let Router = express.Router();
+dotenv.config();
 
-    ficheRouter
-      .route(this.PARAMETERS)
-      .get((req: Request, res: Response) => {
-        this.getFicheOnId(req, res);
-      })
-      .put((req: Request, res: Response) => {
-        this.updateCurrentFiche(req, res);
-      })
-      .delete((req: Request, res: Response) => {
-        this.deleteFicheOnId(req, res);
-      });
-  }
-}
+const PARAMETERS: string = process.env.PARAMETERS as string;
 
-export default ficheRouter;
+// use routes
+Router.route("/").post((req: Request, res: Response) => {
+  createNewFiche(req, res);
+});
+
+Router.route(PARAMETERS)
+  .get((req: Request, res: Response) => {
+    getFicheOnId(req, res);
+  })
+  .put((req: Request, res: Response) => {
+    updateCurrentFiche(req, res);
+  })
+  .delete((req: Request, res: Response) => {
+    deleteFicheOnId(req, res);
+  });
+
+export default Router;

@@ -2,32 +2,31 @@ import { sortOnDatum, sortOnNaam } from "../common/abstract.methods";
 import { IFiche } from "../interface/fiche.interface";
 import fiche from "../model/fiche.model";
 
-export default class ficheService {
-  protected findAll = async (sort?: any) => {
-    if (sort === "naam") {
-      const result = await fiche.find();
-      return sortOnNaam(result);
-    } else if (sort === "datum") {
-      const result = await fiche.find();
-      return sortOnDatum(result);
-    } else {
-      return await fiche.find();
-    }
-  };
-  protected ficheOnId = async (id: any) => await fiche.findOne(id);
+export const findAllFiches = async (sort?: any) => {
+  if (sort === "naam") {
+    const result = await fiche.find();
+    return sortOnNaam(result);
+  } else if (sort === "datum") {
+    const result = await fiche.find();
+    return sortOnDatum(result);
+  } else {
+    return await fiche.find();
+  }
+};
 
-  protected createFiche = async (newFiche: IFiche) => {
-    const createdFiche = new fiche(newFiche);
-    await createdFiche.save();
-  };
+export const ficheOnId = async (id: any) => await fiche.findOne(id);
 
-  protected updateFiche = async (editFiche: IFiche) => {
-    const id = { _id: editFiche._id };
-    await fiche.findOneAndUpdate(id, editFiche);
-  };
+export const createFiche = async (newFiche: IFiche) => {
+  const createdFiche = new fiche(newFiche);
+  await createdFiche.save();
+};
 
-  protected deleteFiche = async (id: string) => {
-    const ficheOnId = { _id: id };
-    await fiche.deleteOne(ficheOnId);
-  };
-}
+export const updateFiche = async (editFiche: IFiche) => {
+  const id = { _id: editFiche._id };
+  await fiche.findOneAndUpdate(id, editFiche);
+};
+
+export const deleteFiche = async (id: string) => {
+  const ficheOnId = { _id: id };
+  await fiche.deleteOne(ficheOnId);
+};
